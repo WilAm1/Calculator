@@ -1,0 +1,27 @@
+* {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.calc-body {
+    height: 500px;
+    padding: 10px;
+    width: 30%;
+    margin: 10vh auto;
+    background-color: aqua;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+}
+
+.display {
+    background-color: beige;
+    height: 200px;
+}
+
+.btn-container {
+    background-color: cadetblue;
+    height: 100px;
+}
