@@ -19,6 +19,9 @@
 .display {
     background-color: beige;
     height: 200px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .btn-container {
