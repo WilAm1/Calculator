@@ -1,4 +1,4 @@
-function assignEventListener() {
+function assignDisplayableEventListener() {
     const aAllBtns = document.querySelectorAll('.btn-display');
 
     aAllBtns.forEach(btn => {
@@ -6,16 +6,10 @@ function assignEventListener() {
             const value = e.target.textContent;
             storeValue(value);
             changeInputDisplay()
-            checkOperator()
         })
     });
 }
 
-function checkOperator() {
-    const operators = ['+', '-', '*', '/'];
-    const operator = operators.find(x => sUserInput.split('').includes(x));
-    if (operator) console.log(operator)
-}
 
 function storeValue(value) {
     sUserInput += value;
@@ -28,4 +22,4 @@ function changeInputDisplay() {
     inputTextP.textContent = sUserInput;
 }
 
-assignEventListener();
+assignDisplayableEventListener();
