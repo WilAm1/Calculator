@@ -15,30 +15,31 @@ function displayCompExp(expression) {
     computationDOM.textContent = expression;
 }
 
-function compute() {
-    // 
+function storeResult(result) {
+    isSecondNum = true;
+    firstNum = result;
+    secondNum = '';
 }
-let initialNum = '';
+let firstNum = '';
+let secondNum = '';
 let isSecondNum = false;
-let storedNum = '';
 let operatorValue = '';
-let compExpression = '';
 let result = 0;
+let compExpression = '';
 
 btnDisplayableArr.forEach(btn => {
     btn.addEventListener('click', e => {
         const num = e.target.textContent;
         let updateNum = '';
         if (!isSecondNum) {
-            initialNum += num;
-            updateNum = initialNum;
-
+            firstNum += num;
+            updateNum = firstNum;
         } else {
-            storedNum += num;
-            updateNum = storedNum;
+            secondNum += num;
+            updateNum = secondNum;
         }
         displayInitExp(updateNum);
-        console.log(updateNum, isSecondNum);
+        console.log('Display:', updateNum, isSecondNum);
     })
 });
 
@@ -47,12 +48,12 @@ const btnOperators = Array.from(document.querySelectorAll('.btn-operator'));
 btnOperators.forEach(btn => {
     btn.addEventListener('click', e => {
         operatorValue = e.target.textContent;
-        compExpression = initialNum + operatorValue;
+        compExpression = firstNum + operatorValue;
         displayCompExp(compExpression);
         console.log(operatorValue);
         isSecondNum = true;
         displayInitExp('');
-        console.log(',nadfasf', initialNum);
+        console.log('1stNum', firstNum);
     })
 });
 
@@ -71,11 +72,15 @@ function operate(a, b, operator) {
     if (result === Infinity) return 'lmao'
     return result
 }
+
+
 const equalBtn = document.querySelector('.btn-equal');
+
 equalBtn.addEventListener('click', () => {
-    compExpression = initialNum + operatorValue + storedNum;
+    compExpression = firstNum + operatorValue + secondNum;
+    const result = operate(+firstNum, +secondNum, operatorValue);
+    console.log('result', result);
     displayCompExp(compExpression);
-    const result = operate(+initialNum, +storedNum, operatorValue);
-    console.log(result);
     displayInitExp(result);
+    storeResult(result);
 });
