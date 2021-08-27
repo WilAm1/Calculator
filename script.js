@@ -5,36 +5,71 @@ function assignNumEventListeners() {
         btn.addEventListener('click', e => {
             const value = e.target.textContent;
             storeValue(value);
-
-            changeInputDisplay()
+            changeInputDisplay(sUserInput)
         })
     });
 }
 
-function changeInputDisplay() {
+function changeInputDisplay(str) {
     const inputTextP = document.getElementById('input-text');
-    inputTextP.textContent = sUserInput;
+    inputTextP.textContent = str;
+}
+
+function changeComputeDisplay(num) {
+    const compPara = document.getElementById('computation');
+    // tempNum = +sUserInput;
+    compPara.textContent = num;
+
 }
 
 function storeValue(value) {
     sUserInput += value;
     console.log(sUserInput);
 }
-let sUserInput = '';
 
+function operate() {
+    const result = (operator === '+') ? +tempNum + +sUserInput :
+        (operator === '-') ? +tempNum - +sUserInput :
+        (operator === '*') ? +tempNum * +sUserInput :
+        (operator === '/') ? +tempNum / +sUserInput : null
+    console.log(result)
+    stringOperation = tempNum + operator + sUserInput;
+    return result
+}
+
+function displayResult(result) {
+    sUserInput = result;
+    changeInputDisplay(result);
+    changeComputeDisplay(stringOperation);
+}
+
+let sUserInput = '';
+let tempNum = 0;
+let operator = '';
+let stringOperation = '';
 const aOperatorBtns = document.querySelectorAll('.btn-operator');
-const compPara = document.getElementById('computation');
 
 aOperatorBtns.forEach(btn => {
     btn.addEventListener('click', e => {
-        compPara.textContent = sUserInput + ' ' + e.target.textContent;
-        console.log(sUserInput + ' ' + e.target.textContent);
+        changeComputeDisplay(e.target.textContent);
+        operator = e.target.textContent;
         sUserInput = '';
         changeInputDisplay()
     });
 });
 
+
+
+const equalBtn = document.querySelector('.btn-equal');
+equalBtn.addEventListener('click', e => {
+    const result = operate();
+    displayResult(result);
+});
 assignNumEventListeners();
+
+
+
+
 
 
 // Display clicked btn
