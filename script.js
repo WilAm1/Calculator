@@ -6,26 +6,13 @@ const inputTextDOM = document.querySelector('#input-text');
 
 // Display Input into the input Paragraph
 
-function displayInitExp(num) {
-    if (!isSecondNum) {
-        initialNum += num;
-        inputTextDOM.textContent = initialNum;
-        console.log(initialNum)
-
-    } else {
-        storedNum += num;
-        inputTextDOM.textContent = storedNum;
-        console.log(storedNum);
-    }
+function displayInitExp(str) {
+    inputTextDOM.textContent = str;
 }
 
-function displayCompExp(operator) {
+function displayCompExp(expression) {
     const computationDOM = document.querySelector('#computation');
-    // storedNum = initialNum;
-    compExpression = initialNum + operator;
-    computationDOM.textContent = compExpression;
-    // initialNum = '';
-
+    computationDOM.textContent = expression;
 }
 
 let initialNum = '';
@@ -34,25 +21,36 @@ let storedNum = '';
 let operatorValue = '';
 let compExpression = '';
 let result = 0;
+
 btnDisplayableArr.forEach(btn => {
     btn.addEventListener('click', e => {
-        displayInitExp(e.target.textContent);
+        const num = e.target.textContent;
+        let updateNum = '';
+        if (!isSecondNum) {
+            initialNum += num;
+            updateNum = initialNum;
+
+        } else {
+            displayInitExp('');
+            storedNum += num;
+            updateNum = storedNum;
+        }
+        displayInitExp(updateNum);
+        console.log(updateNum, isSecondNum);
     })
 });
 
 // If operator is found, move it to computation p
-
 const btnOperators = Array.from(document.querySelectorAll('.btn-operator'));
-console.log(btnOperators)
-
 btnOperators.forEach(btn => {
     btn.addEventListener('click', e => {
         operatorValue = e.target.textContent;
-        displayCompExp(operatorValue);
+        compExpression = initialNum + operatorValue;
+        displayCompExp(compExpression);
         console.log(operatorValue);
         isSecondNum = true;
-        // acceptNext
 
     })
 });
+
 // make input P displayable again.
