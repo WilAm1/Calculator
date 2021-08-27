@@ -65,12 +65,17 @@ function operate(a, b, operator) {
         '-': (a, b) => a - b,
         '*': (a, b) => a * b,
         '/': (a, b) => a / b,
-
     };
-    return operators[operator](a, b)
+    const result = operators[operator](a, b);
+    console.log(result);
+    if (result === Infinity) return 'lmao'
+    return result
 }
 const equalBtn = document.querySelector('.btn-equal');
-equalBtn.addEventListener('click', e => {
+equalBtn.addEventListener('click', () => {
+    compExpression = initialNum + operatorValue + storedNum;
+    displayCompExp(compExpression);
     const result = operate(+initialNum, +storedNum, operatorValue);
     console.log(result);
+    displayInitExp(result);
 });
