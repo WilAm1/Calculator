@@ -3,10 +3,18 @@ function assignEventListener() {
 
     aAllBtns.forEach(btn => {
         btn.addEventListener('click', e => {
-            storeValue(e.target.textContent);
+            const value = e.target.textContent;
+            storeValue(value);
             changeInputDisplay()
+            checkOperator()
         })
     });
+}
+
+function checkOperator() {
+    const operators = ['+', '-', '*', '/'];
+    const operator = operators.find(x => sUserInput.split('').includes(x));
+    if (operator) console.log(operator)
 }
 
 function storeValue(value) {
