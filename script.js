@@ -58,6 +58,19 @@ btnOperators.forEach(btn => {
 
 // make input P displayable again.
 // 
-
 // Compute total
+function operate(a, b, operator) {
+    const operators = {
+        '+': (a, b) => a + b,
+        '-': (a, b) => a - b,
+        '*': (a, b) => a * b,
+        '/': (a, b) => a / b,
+
+    };
+    return operators[operator](a, b)
+}
 const equalBtn = document.querySelector('.btn-equal');
+equalBtn.addEventListener('click', e => {
+    const result = operate(+initialNum, +storedNum, operatorValue);
+    console.log(result);
+});
