@@ -33,6 +33,13 @@ function storeResult(result) {
     firstNum = result;
     secondNum = '';
 }
+
+// Prevents redundant zeros 
+function updateNum(numToUpdate, num) {
+    numToUpdate += num;
+    return Number(numToUpdate).toString()
+}
+
 let firstNum = '';
 let secondNum = '';
 let isSecondNum = false;
@@ -42,16 +49,15 @@ let compExpression = '';
 btnDisplayableArr.forEach(btn => {
     btn.addEventListener('click', e => {
         const num = e.target.textContent;
-        let updateNum = '';
         if (!isSecondNum) {
-            firstNum += num;
-            updateNum = firstNum;
+            firstNum = updateNum(firstNum, num);
         } else {
-            secondNum += num;
-            updateNum = secondNum;
+            secondNum = updateNum(secondNum, num);
         }
-        displayInitExp(updateNum);
-        console.log('Display:', updateNum, isSecondNum);
+        const displayNum = (!isSecondNum) ? firstNum : secondNum;
+
+        displayInitExp(displayNum);
+        console.log('Display:', displayNum, isSecondNum);
     })
 });
 
