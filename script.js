@@ -15,6 +15,9 @@ function displayCompExp(expression) {
     computationDOM.textContent = expression;
 }
 
+function compute() {
+    // 
+}
 let initialNum = '';
 let isSecondNum = false;
 let storedNum = '';
@@ -31,7 +34,6 @@ btnDisplayableArr.forEach(btn => {
             updateNum = initialNum;
 
         } else {
-            displayInitExp('');
             storedNum += num;
             updateNum = storedNum;
         }
@@ -49,8 +51,13 @@ btnOperators.forEach(btn => {
         displayCompExp(compExpression);
         console.log(operatorValue);
         isSecondNum = true;
-
+        displayInitExp('');
+        console.log(',nadfasf', initialNum);
     })
 });
 
 // make input P displayable again.
+// 
+
+// Compute total
+const equalBtn = document.querySelector('.btn-equal');
