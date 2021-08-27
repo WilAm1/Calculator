@@ -37,7 +37,6 @@ let firstNum = '';
 let secondNum = '';
 let isSecondNum = false;
 let operatorValue = '';
-let result = 0;
 let compExpression = '';
 
 btnDisplayableArr.forEach(btn => {
@@ -57,15 +56,15 @@ btnDisplayableArr.forEach(btn => {
 });
 
 // If operator is clicked, moved it to upper div.
-const btnOperators = Array.from(document.querySelectorAll('.btn-operator'));
-btnOperators.forEach(btn => {
+const operatorBtns = Array.from(document.querySelectorAll('.btn-operator'));
+operatorBtns.forEach(btn => {
     btn.addEventListener('click', e => {
         operatorValue = e.target.textContent;
         compExpression = firstNum + operatorValue;
-        displayCompExp(compExpression);
-        console.log(operatorValue);
         isSecondNum = true;
+        displayCompExp(compExpression);
         displayInitExp('');
+        console.log('operator', operatorValue);
         console.log('1stNum', firstNum);
     })
 });
