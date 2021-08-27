@@ -80,3 +80,16 @@ equalBtn.addEventListener('click', () => {
     displayInitExp(result);
     storeResult(result);
 });
+
+// Other btns
+
+const clearBtn = document.querySelector('.btn-clear');
+clearBtn.addEventListener('click', e => {
+    firstNum = '';
+    secondNum = '';
+    isSecondNum = false;
+    operatorValue = '';
+    compExpression = '';
+    displayCompExp('cleared');
+    displayInitExp('cleared');
+});
