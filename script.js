@@ -4,8 +4,7 @@ const btnDisplayableArr = Array.from(document.querySelectorAll('.btn-display'));
 console.log(btnDisplayableArr);
 const inputTextDOM = document.querySelector('#input-text');
 
-// Display Input into the input Paragraph
-
+// Display into Paragraphs
 function displayInitExp(str) {
     inputTextDOM.textContent = str;
 }
@@ -13,6 +12,20 @@ function displayInitExp(str) {
 function displayCompExp(expression) {
     const computationDOM = document.querySelector('#computation');
     computationDOM.textContent = expression;
+}
+
+// Compute total
+function operate(a, b, operator) {
+    const operators = {
+        '+': (a, b) => a + b,
+        '-': (a, b) => a - b,
+        '*': (a, b) => a * b,
+        '/': (a, b) => a / b,
+    };
+    const result = operators[operator](a, b);
+    console.log(result);
+    if (result === Infinity) return 'lmao'
+    return result
 }
 
 function storeResult(result) {
@@ -43,7 +56,7 @@ btnDisplayableArr.forEach(btn => {
     })
 });
 
-// If operator is found, move it to computation p
+// If operator is clicked, moved it to upper div.
 const btnOperators = Array.from(document.querySelectorAll('.btn-operator'));
 btnOperators.forEach(btn => {
     btn.addEventListener('click', e => {
@@ -56,22 +69,6 @@ btnOperators.forEach(btn => {
         console.log('1stNum', firstNum);
     })
 });
-
-// make input P displayable again.
-// 
-// Compute total
-function operate(a, b, operator) {
-    const operators = {
-        '+': (a, b) => a + b,
-        '-': (a, b) => a - b,
-        '*': (a, b) => a * b,
-        '/': (a, b) => a / b,
-    };
-    const result = operators[operator](a, b);
-    console.log(result);
-    if (result === Infinity) return 'lmao'
-    return result
-}
 
 
 const equalBtn = document.querySelector('.btn-equal');
