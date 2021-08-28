@@ -105,3 +105,19 @@ clearBtn.addEventListener('click', e => {
     displayCompExp('cleared');
     displayInitExp('cleared');
 });
+
+function deleteOneLetter(str) {
+    return str.slice(0, str.length - 1)
+}
+const delBtn = document.querySelector('.btn-del');
+delBtn.addEventListener('click', () => {
+    if (!isSecondNum) {
+        firstNum = deleteOneLetter(firstNum);
+        displayInitExp(firstNum);
+    } else {
+        secondNum = deleteOneLetter(secondNum);
+        displayInitExp(secondNum);
+
+    }
+
+})
