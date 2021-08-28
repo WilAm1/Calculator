@@ -70,6 +70,7 @@ btnDisplayableArr.forEach(btn => {
 const operatorBtns = Array.from(document.querySelectorAll('.btn-operator'));
 operatorBtns.forEach(btn => {
     btn.addEventListener('click', e => {
+        if (firstNum === "") return
         if (secondNum !== "") {
             const tempResult = operate(+firstNum, +secondNum, operatorValue);
             wipeValues(tempResult);
