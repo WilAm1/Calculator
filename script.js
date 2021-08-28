@@ -87,6 +87,7 @@ operatorBtns.forEach(btn => {
 const equalBtn = document.querySelector('.btn-equal');
 
 equalBtn.addEventListener('click', () => {
+    if (firstNum === '' || operatorValue === "" || secondNum === '') return
     compExpression = firstNum + operatorValue + secondNum;
     const result = operate(+firstNum, +secondNum, operatorValue);
     displayCompExp(compExpression);
@@ -96,17 +97,18 @@ equalBtn.addEventListener('click', () => {
 
 // Other btns
 const clearBtn = document.querySelector('.btn-clear');
-clearBtn.addEventListener('click', e => {
+clearBtn.addEventListener('click', () => {
     firstNum = '';
     secondNum = '';
     isSecondNum = false;
     operatorValue = '';
     compExpression = '';
-    displayCompExp('cleared');
-    displayInitExp('cleared');
+    displayCompExp('');
+    displayInitExp('0');
 });
 
 function deleteOneLetter(str) {
+    str = str.toString();
     return str.slice(0, str.length - 1)
 }
 const delBtn = document.querySelector('.btn-del');
