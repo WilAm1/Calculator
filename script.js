@@ -122,3 +122,6 @@ delBtn.addEventListener('click', () => {
         displayInitExp(secondNum);
     }
 })
+
+const date = document.getElementById('date');
+date.textContent = new Date().getFullYear();
