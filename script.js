@@ -117,7 +117,5 @@ delBtn.addEventListener('click', () => {
     } else {
         secondNum = deleteOneLetter(secondNum);
         displayInitExp(secondNum);
-
     }
-
 })
