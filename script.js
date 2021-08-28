@@ -24,20 +24,33 @@ function operate(a, b, operator) {
     };
     const result = operators[operator](a, b);
     console.log(result);
-    if (result === Infinity) return 'lmao'
+    if (result === Infinity) return 'Im gonna break lmao'
+        // Check if decimal num 
+    if (result % 1 !== 0) return result.toFixed(3)
+
     return result
 }
 
 function storeResult(result) {
-    isSecondNum = true;
+    isSecondNum = false;
     firstNum = result;
     secondNum = '';
+    operatorValue = '';
 }
 
 // Prevents redundant zeros 
 function updateNum(numToUpdate, num) {
+    console.log(typeof numToUpdate, 'numtoL', numToUpdate);
+    numToUpdate = numToUpdate.toString();
+    if (numToUpdate.includes('.')) {
+        if (num === ".") return numToUpdate
+        return numToUpdate += num
+    }
     numToUpdate += num;
-    return Number(numToUpdate).toString()
+    if (num === ".") return numToUpdate
+        // if (Number(numToUpdate) % 1 === 0 && Number(numToUpdate) < 0) return numToUpdate
+        // if (num.includes('.')) return numToUpdate
+    return numToUpdate.replace(/^0+/, '')
 }
 
 let firstNum = '';
@@ -61,17 +74,32 @@ btnDisplayableArr.forEach(btn => {
     })
 });
 
+function checkExpression(str) {
+    const fourOperators = operatorBtns.map(btn => btn.textContent);
+
+
+}
 // If operator is clicked, moved it to upper div.
 const operatorBtns = Array.from(document.querySelectorAll('.btn-operator'));
 operatorBtns.forEach(btn => {
     btn.addEventListener('click', e => {
+        // console.log(checkExpression(compExpression))
+        if (secondNum !== "") {
+            console.log('pwede na', secondNum, firstNum)
+            const sampleResult = operate(+firstNum, +secondNum, operatorValue);
+            console.log(sampleResult)
+            displayCompExp(sampleResult);
+            storeResult(sampleResult);
+
+        }
         operatorValue = e.target.textContent;
         compExpression = firstNum + operatorValue;
         isSecondNum = true;
+        secondNum = '';
         displayCompExp(compExpression);
         displayInitExp('');
-        console.log('operator', operatorValue);
-        console.log('1stNum', firstNum);
+        console.log('operation', operatorValue);
+        console.log('1stNum', firstNum, '2ndNum', secondNum);
     })
 });
 
@@ -88,7 +116,6 @@ equalBtn.addEventListener('click', () => {
 });
 
 // Other btns
-
 const clearBtn = document.querySelector('.btn-clear');
 clearBtn.addEventListener('click', e => {
     firstNum = '';
