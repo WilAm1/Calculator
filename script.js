@@ -33,9 +33,8 @@ function wipeValues(result) {
 
 function updateNum(numToUpdate, num) {
     numToUpdate = numToUpdate.toString();
-    if (numToUpdate.includes('.')) {
-        if (num === ".") return numToUpdate
-        return numToUpdate += num
+    if (numToUpdate.includes('.') && (num === ".")) {
+        return numToUpdate
     }
     numToUpdate += num;
     // Prevents redundant zeros 
