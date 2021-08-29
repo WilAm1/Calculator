@@ -1,9 +1,6 @@
-// Acquire displayable btns
-const btnDisplayableArr = Array.from(document.querySelectorAll('.btn-display'));
-const inputTextDOM = document.querySelector('#input-text');
-
 // Display into Paragraphs
 function displayInitExp(str) {
+    const inputTextDOM = document.querySelector('#input-text');
     inputTextDOM.textContent = str;
 }
 
@@ -12,8 +9,8 @@ function displayCompExp(expression) {
     computationDOM.textContent = expression;
 }
 
-// Compute total
 function operate(a, b, operator) {
+    // Compute total
     const operators = {
         '+': (a, b) => a + b,
         '-': (a, b) => a - b,
@@ -34,7 +31,6 @@ function wipeValues(result) {
     isSecondNum = false;
 }
 
-// Prevents redundant zeros 
 function updateNum(numToUpdate, num) {
     numToUpdate = numToUpdate.toString();
     if (numToUpdate.includes('.')) {
@@ -42,15 +38,37 @@ function updateNum(numToUpdate, num) {
         return numToUpdate += num
     }
     numToUpdate += num;
-    if (num === ".") return numToUpdate
+    // Prevents redundant zeros 
     return numToUpdate.replace(/^0+/, '')
 }
 
+function deleteDigit(str) {
+    str = str.toString();
+    return str.slice(0, str.length - 1)
+}
+
+
+
+// DOM constants
+const btnDisplayableArr = Array.from(document.querySelectorAll('.btn-display'));
+// Other btns
+const clearBtn = document.querySelector('.btn-clear');
+const delBtn = document.querySelector('.btn-del');
+const equalBtn = document.querySelector('.btn-equal');
+// If operator is clicked, moved it to upper div.
+const operatorBtns = Array.from(document.querySelectorAll('.btn-operator'));
+
+// Editable Values
 let firstNum = '';
 let secondNum = '';
 let isSecondNum = false;
 let operatorValue = '';
 let compExpression = '';
+
+// copyright date
+const date = document.getElementById('date');
+date.textContent = new Date().getFullYear();
+
 
 btnDisplayableArr.forEach(btn => {
     btn.addEventListener('click', e => {
@@ -66,11 +84,10 @@ btnDisplayableArr.forEach(btn => {
 });
 
 
-// If operator is clicked, moved it to upper div.
-const operatorBtns = Array.from(document.querySelectorAll('.btn-operator'));
 operatorBtns.forEach(btn => {
     btn.addEventListener('click', e => {
-        if (firstNum === "" || isNaN(firstNum)) return
+        if (firstNum === "" || isNaN(firstNum)) return //Catches NaN and undefined values
+            //Runs to compute first operation if attempting to run multiple operation
         if (secondNum !== "") {
             const tempResult = operate(+firstNum, +secondNum, operatorValue);
             wipeValues(tempResult);
@@ -85,7 +102,6 @@ operatorBtns.forEach(btn => {
 });
 
 
-const equalBtn = document.querySelector('.btn-equal');
 
 equalBtn.addEventListener('click', () => {
     if (firstNum === '' || operatorValue === "" || secondNum === '') return
@@ -96,8 +112,7 @@ equalBtn.addEventListener('click', () => {
     wipeValues(result);
 });
 
-// Other btns
-const clearBtn = document.querySelector('.btn-clear');
+
 clearBtn.addEventListener('click', () => {
     firstNum = '';
     secondNum = '';
@@ -108,20 +123,13 @@ clearBtn.addEventListener('click', () => {
     displayInitExp('0');
 });
 
-function deleteOneLetter(str) {
-    str = str.toString();
-    return str.slice(0, str.length - 1)
-}
-const delBtn = document.querySelector('.btn-del');
+
 delBtn.addEventListener('click', () => {
     if (!isSecondNum) {
-        firstNum = deleteOneLetter(firstNum);
+        firstNum = deleteDigit(firstNum);
         displayInitExp(firstNum);
     } else {
-        secondNum = deleteOneLetter(secondNum);
+        secondNum = deleteDigit(secondNum);
         displayInitExp(secondNum);
     }
 })
-
-const date = document.getElementById('date');
-date.textContent = new Date().getFullYear();
